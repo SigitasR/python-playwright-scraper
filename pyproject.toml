@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "barbora-scraper"
+name = "python-playwright-scraper"
 version = "0.1.0"
 description = "Playwright experiments"
 authors = ["Your Name <you@example.com>"]
 license = "BSD"
 readme = "README.md"
-packages = [{include = "barbora_scraper"}]
+packages = [{include = "python-playwright-scraper"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
