@@ -2,10 +2,10 @@ import csv
 import time
 from dataclasses import asdict
 
-from src.dataclasses.ProductData import ProductData
+from src.dataclasses.ProductInfo import ProductInfo
 
 
-def write_to_file(data: [ProductData]):
+def write_to_file(data: [ProductInfo]):
     columns: [] = asdict(data[0]).keys()
     file_name = f'output-{time.time_ns()}.csv'
     try:

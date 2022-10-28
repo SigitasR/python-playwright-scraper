@@ -6,7 +6,7 @@ class Pagination:
         self.page = page
         self.pagination_container = page.locator('div.b-pagination-wrapper--desktop-top ul.pagination')
 
-    async def click_next(self):
+    async def click_next(self) -> None:
         await self.page.wait_for_load_state('networkidle')
         await self.pagination_container.locator('text="»"').click()
 

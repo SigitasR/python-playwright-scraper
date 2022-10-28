@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class ProductData:
+class ProductInfo:
     title: str
     price: str
     in_stock: bool
