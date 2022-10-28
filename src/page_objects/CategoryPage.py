@@ -6,9 +6,8 @@ from src.page_objects.Pagination import Pagination
 class CategoryPage:
     def __init__(self, page: Page):
         self.page = page
-        self.products_list = page.locator('div.b-products-list--wrapper')
-
         self.pagination = Pagination(self.page)
+        self.products_list = page.locator('div.b-products-list--wrapper')
 
     async def get_page_products(self) -> [str]:
         await self.page.wait_for_load_state('networkidle')
