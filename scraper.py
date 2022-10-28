@@ -1,8 +1,9 @@
 import asyncio
+from time import perf_counter
 
 from playwright.async_api import async_playwright
 
-from CategoryPage import CategoryPage
+from src.page_objects.CategoryPage import CategoryPage
 
 
 async def browse_products(urls: [str]):
@@ -23,6 +24,7 @@ async def browse_products(urls: [str]):
 
 async def main():
     async with async_playwright() as pw:
+        time_before = perf_counter()
         browser = await pw.chromium.launch(headless=False)
         page = await browser.new_page(base_url="https://barbora.lt")
         await page.context.add_cookies([
@@ -34,14 +36,16 @@ async def main():
         category = CategoryPage(page)
         links = await category.go_trough_all_pages()
 
-        number_of_links = 15
+        await browser.close()
+
+        number_of_links = 20
         splits = [links[i:i + number_of_links] for i in range(0, len(links), number_of_links)]
 
         print(len(splits))
 
         await asyncio.gather(*[browse_products(split) for split in splits])
 
-        await browser.close()
+        print(f'Total time: {perf_counter() - time_before}')
 
 
 asyncio.run(main())

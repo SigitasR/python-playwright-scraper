@@ -1,6 +1,6 @@
 from playwright.async_api import Page
 
-from Pagination import Pagination
+from src.page_objects.Pagination import Pagination
 
 
 class CategoryPage:
@@ -20,7 +20,7 @@ class CategoryPage:
             product_box = self.products_list.locator(
                 'div.b-product--wrap2.b-product--desktop-grid a.b-product-title--desktop').nth(i)
             await product_box.wait_for()
-            await product_box.scroll_into_view_if_needed()
+            # await product_box.scroll_into_view_if_needed()
             product_href = await product_box.get_attribute('href')
             if product_href:
                 links.append(product_href)
