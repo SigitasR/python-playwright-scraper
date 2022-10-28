@@ -1,6 +1,6 @@
-from dataclasses import asdict
 import csv
 import time
+from dataclasses import asdict
 
 from src.dataclasses.ProductData import ProductData
 
