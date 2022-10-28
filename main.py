@@ -1,31 +1,10 @@
 import asyncio
 from time import perf_counter
 
-from playwright.async_api import async_playwright, Page, Browser
+from playwright.async_api import async_playwright
 
 from src.page_objects.CategoryPage import CategoryPage
-
-
-async def create_page(browser: Browser) -> Page:
-    context = await browser.new_context(base_url="https://barbora.lt")
-    page = await context.new_page()
-    await page.context.add_cookies([
-        {'url': 'https://barbora.lt', 'name': 'ageLimitationWarning', 'value': '20'},
-        {'url': 'https://barbora.lt', 'name': 'CookieConsent', 'value': 'reeee'},
-    ])
-
-    return page
-
-
-async def browse_products(browser: Browser, urls: [str]):
-    async with async_playwright() as pw:
-        page = await create_page(browser)
-        products: [str] = []
-        for url in urls:
-            await page.goto(url)
-            products.append(await page.title())
-        return products
-
+from src.util.browser_util import create_page, browse_products
 
 if __name__ == '__main__':
     async def main() -> None:

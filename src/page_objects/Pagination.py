@@ -20,5 +20,3 @@ class Pagination:
         navigation_item_count: int = await self.pagination_container.locator('li').count()
         last_pagination_item = self.pagination_container.locator('li').nth(navigation_item_count - 2)
         return await last_pagination_item.get_attribute('class') == 'active'
-
-
