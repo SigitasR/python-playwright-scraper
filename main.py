@@ -16,6 +16,7 @@ if __name__ == '__main__':
 
             category = CategoryPage(page)
             links = await category.go_trough_all_pages()
+            await page.context.close()
 
             number_of_links_per_browser = 20
             splits = [links[i:i + number_of_links_per_browser] for i in
