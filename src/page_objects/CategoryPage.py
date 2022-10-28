@@ -27,7 +27,7 @@ class CategoryPage:
         return links
 
     async def go_trough_all_pages(self) -> List[str]:
-        links: [str] = []
+        links: List[str] = []
         while not await self.pagination.is_last_page():
             links.extend(await self.get_page_products_links())
             await self.pagination.click_next()
