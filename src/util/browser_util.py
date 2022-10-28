@@ -1,5 +1,6 @@
 from playwright.async_api import Browser, Page
 
+from src.dataclasses.ProductData import ProductData
 from src.page_objects.ProductPage import ProductPage
 
 
@@ -14,9 +15,9 @@ async def create_page(browser: Browser) -> Page:
     return page
 
 
-async def browse_products(browser: Browser, urls: [str]):
+async def browse_products(browser: Browser, urls: [str]) -> [ProductData]:
     page = await create_page(browser)
-    products: [str] = []
+    products: [ProductData] = []
     for url in urls:
         await page.goto(url)
         product_page = ProductPage(page)
