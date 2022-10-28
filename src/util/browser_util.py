@@ -11,6 +11,7 @@ async def create_page(browser: Browser) -> Page:
         {'url': 'https://barbora.lt', 'name': 'ageLimitationWarning', 'value': '20'},
         {'url': 'https://barbora.lt', 'name': 'CookieConsent', 'value': 'reeee'},
     ])
+    print(f'Creating new BrowserContext. Current count: {len(browser.contexts)}')
 
     return page
 
