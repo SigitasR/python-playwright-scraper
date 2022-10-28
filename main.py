@@ -11,8 +11,8 @@ if __name__ == '__main__':
     async def main() -> None:
         async with async_playwright() as pw:
             time_before = perf_counter()
-
             browser = await pw.chromium.launch(headless=True)
+
             links = await collect_product_links(browser, '/gerimai/stiprieji-alkoholiniai-gerimai/')
             link_batches = split_product_links_into_batches(links, 10)
             result = await collect_product_data(browser, link_batches)
