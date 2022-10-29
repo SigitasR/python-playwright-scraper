@@ -21,10 +21,11 @@ if __name__ == '__main__':
             link_batches = split_product_links_into_batches(links, parameters['batch_size'])
             result = await collect_product_data(browser, link_batches)
 
-            print(len(result))
+            print(f'Total products scraped: {len(result)}')
             write_to_file(result)
 
             await browser.close()
             print(f'Total time: {perf_counter() - time_before}')
+
 
     asyncio.run(main())

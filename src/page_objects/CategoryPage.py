@@ -16,7 +16,7 @@ class CategoryPage:
         links: List[str] = []
         await self.pagination.pagination_container.wait_for()
         product_count = await self.products_list.locator('div.b-product--wrap2.b-product--desktop-grid').count()
-        print(product_count)
+        print(f'Product boxes in page: {product_count}')
         for i in range(0, product_count):
             product_box = self.products_list.locator(
                 'div.b-product--wrap2.b-product--desktop-grid a.b-product-title--desktop').nth(i)

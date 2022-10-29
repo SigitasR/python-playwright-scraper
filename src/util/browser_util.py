@@ -20,13 +20,17 @@ async def create_page(browser: Browser) -> Page:
     return page
 
 
-async def browse_products(browser: Browser, urls: List[str]) -> List[ProductInfo]:
+async def scrape_product(page: Page, url: str) -> ProductInfo:
+    await page.goto(url)
+    product_page = ProductPage(page)
+    return await product_page.get_product_info()
+
+
+async def scrape_product_list(browser: Browser, urls: List[str]) -> List[ProductInfo]:
     page = await create_page(browser)
     products: [ProductInfo] = []
     for url in urls:
-        await page.goto(url)
-        product_page = ProductPage(page)
-        products.append(await product_page.get_product_info())
+        products.append(await scrape_product(page, url))
     await page.context.close()
     return products
 
@@ -42,5 +46,5 @@ async def collect_product_links(browser: Browser, category_url: str) -> List[str
 
 
 async def collect_product_data(browser: Browser, link_batches: List) -> List[ProductInfo]:
-    result = await asyncio.gather(*[browse_products(browser, split) for split in link_batches])
+    result = await asyncio.gather(*[scrape_product_list(browser, split) for split in link_batches])
     return [item for sublist in result for item in sublist]
