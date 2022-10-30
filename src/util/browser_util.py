@@ -2,7 +2,6 @@ import asyncio
 from typing import List
 
 from playwright.async_api import Browser, Page
-
 from src.dataclasses.ProductInfo import ProductInfo
 from src.page_objects.CategoryPage import CategoryPage
 from src.page_objects.ProductPage import ProductPage
@@ -21,16 +20,20 @@ async def create_page(browser: Browser) -> Page:
 
 
 async def scrape_product(page: Page, url: str) -> ProductInfo:
-    await page.goto(url)
-    product_page = ProductPage(page)
-    return await product_page.get_product_info()
+    try:
+        await page.goto(url)
+        product_page = ProductPage(page)
+        return await product_page.get_product_info()
+    except Exception as exception:
+        print(f'Error occurred when accessing URL: {url} \n {exception}')
 
 
 async def scrape_product_list(browser: Browser, urls: List[str]) -> List[ProductInfo]:
     page = await create_page(browser)
     products: List[ProductInfo] = []
     for url in urls:
-        products.append(await scrape_product(page, url))
+        if result := await scrape_product(page, url):
+            products.append(result)
     await page.context.close()
     return products
 
