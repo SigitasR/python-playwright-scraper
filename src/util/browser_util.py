@@ -28,7 +28,7 @@ async def scrape_product(page: Page, url: str) -> ProductInfo:
 
 async def scrape_product_list(browser: Browser, urls: List[str]) -> List[ProductInfo]:
     page = await create_page(browser)
-    products: [ProductInfo] = []
+    products: List[ProductInfo] = []
     for url in urls:
         products.append(await scrape_product(page, url))
     await page.context.close()
