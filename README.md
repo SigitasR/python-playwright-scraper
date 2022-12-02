@@ -10,7 +10,7 @@ Project requires:
 
 
 #### Setup:
-Create Python and activate virtual environment. Inside project root run:
+Create and activate Python virtual environment. Inside project root run:
 
 ```commandline
 python -m venv .env
