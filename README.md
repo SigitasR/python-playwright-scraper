@@ -7,16 +7,21 @@ Writen for training purposes to familiarize myself with Python version of Playwr
 
 Project requires:
 
-Python: `>= 3.10`
 
-[Poetry](https://python-poetry.org/) package manager: `>= 1.2.2` 
 
 #### Setup:
+Create Python and activate virtual environment. Inside project root run:
 
 ```commandline
-poetry install
+python -m venv .env
 
-poetry shell
+source .env/bin/activate
+```
+
+Install required dependencies:
+
+```commandline
+pip install -r requirements.txt
 ```
 
 Before running `main.py` set Node.js memory option to avoid out of memory errors when crawling trough categories with very large amount of items:
@@ -24,7 +29,12 @@ Before running `main.py` set Node.js memory option to avoid out of memory errors
 export NODE_OPTIONS="--max-old-space-size=16384"
 ```
 
-Run main.py inside Poetry virtual env
+Install Playwright browsers:
+```commandline
+playwright install
+```
+
+Run main.py inside virtual env
 ```commandline
 python main.py
 ```
