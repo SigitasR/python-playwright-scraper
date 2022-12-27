@@ -12,8 +12,8 @@ class CategoryPage:
         self.products_list = page.locator('div.b-products-list--wrapper')
 
     async def get_page_products_links(self) -> List[str]:
-        await self.page.wait_for_load_state('networkidle')
         links: List[str] = []
+        await self.page.wait_for_load_state('networkidle')
         await self.pagination.pagination_container.wait_for()
         product_count = await self.products_list.locator('div.b-product--wrap2.b-product--desktop-grid').count()
         print(f'Product boxes in page: {product_count}')
